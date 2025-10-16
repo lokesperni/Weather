@@ -38,7 +38,7 @@ Technologies Used
 
 • Optional: Vercel for deployment 
 
-Clone the repository: git clone https://github.com/
+Clone the repository: git clone https://github.com/lokesperni/Weather
 
 Navigate to the project directory: cd weather-app
 
