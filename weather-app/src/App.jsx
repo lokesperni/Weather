@@ -4,19 +4,21 @@ import "./App.css";
 function App() {
   const [weather, setWeather] = useState(null);
   const [input, setInput] = useState("");
-  const [unit, setUnit] = useState("metric"); // "metric" for Celsius, "imperial" for Fahrenheit
+  const [unit, setUnit] = useState("metric");
   const [darkMode, setDarkMode] = useState(false);
 
+  const API_KEY = "1014179c10b01b69f5ac0d5216d9cfc9";
+
   async function handleWeather() {
-    const API_KEY = "1014179c10b01b69f5ac0d5216d9cfc9";
+    if (!input) return alert("Please enter a city name.");
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${API_KEY}&units=${unit}`;
 
     try {
-      const result = await fetch(url);
-      const response = await result.json();
+      const response = await fetch(url);
+      const data = await response.json();
 
-      if (response.cod === 200) {
-        setWeather(response);
+      if (data.cod === 200) {
+        setWeather(data);
       } else {
         alert("City not found. Please try again.");
         setWeather(null);
@@ -50,6 +52,7 @@ function App() {
             placeholder="Enter city name"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyPress={(e) => e.key === "Enter" && handleWeather()}
           />
           <button onClick={handleWeather}>Search</button>
         </div>
@@ -68,4 +71,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
